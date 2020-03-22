@@ -20,17 +20,12 @@ func ipHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	hostname, err := os.Hostname()
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	port := os.Getenv("PORT")
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
 
 	http.HandleFunc("/", ipHandler)
-	log.Printf("Listening at %s:%s!", hostname, port)
+	log.Printf("Listening on port %s!", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
